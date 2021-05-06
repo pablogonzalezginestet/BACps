@@ -1,0 +1,19 @@
+Package: BACps
+Title: Bayesian Adjustment for Confouding in Bayesian Propensity Score
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Pablo",
+           family = "Gonzalez Ginestet",
+           role = c("aut", "cre"),
+           email = "pablo.gonzalezginestet@mail.mcgill.ca",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Two stage procedure based on three models: prognostic score model,  propensity score model outcome model. The goal from the first stage is to obtain a posterior distribution of the model indicator of the propensity score to be used as an informative prior in the second stage. The second stage computes the average causal effect (conditional) using the informative prior. The informative prior provides a chance to rule out instrumental variables from the PS model, assigning less prior probability to those models that include instrumental variables.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

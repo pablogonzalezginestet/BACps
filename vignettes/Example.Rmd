@@ -1,0 +1,92 @@
+---
+title: "Example"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Example}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(BACps)
+```
+
+
+## Example: Simulated Data
+
+The simulated data can be generated using the function __sim_data__ where the first argument is the sample size and the second one is the exposure effect (conditional) on the outcome. we generate a data of sample size equal to 1000 and an exposure effect of 0.3.
+
+```{r}
+sim_data <- BACps::sim_data(500,.3)
+```
+
+is a list where the first item is the outcome, the second one is the exposure and the last one is the set of covariates.
+The binary exposure is:
+```{r}
+x = sim_data[[2]]
+```
+
+The binary outcome is:
+```{r}
+y = sim_data[[1]]
+```
+
+and the five covariates are:
+```{r}
+U = as.data.frame(sim_data[[3]])
+```
+
+Let's run our procedure BACps with dependence parameter (w) equal to 50. This  parameter governs the relationship between the prognostic score and propensity score. If the dependence parameter is equal to 1, there is no information flowing between both models. So, w=1 corresponds to an uninformative prior for the model indicator of the propensity score.
+
+```{r}
+fit_bacps = BACps::bacps(w=50,x=x,y=y,U=as.data.frame(U), niter_1st=1000, niter_2nd=1500, burnin_1st=500, burnin_2nd=500)
+
+```
+
+
+The average causal effect (conditional) is: 
+
+```{r}
+fit_bacps[[5]]
+```
+
+The posterior probability on the model indicator variable is:
+
+```{r}
+fit_bacps[[4]]
+```
+
+The informative prior distribution on the model indicator of the propensity score used in the second stage (which is a posterior probability in the first stage):
+
+```{r}
+fit_bacps[[1]]
+```
+
+The posterior distribution of the model indicators of the prognostic score model which is used to compute the posterior distribution of the model indicator of the propensity score model:
+
+```{r}
+fit_bacps[[2]]
+```
+
+As a comparator, let's run a penalized logistic regression (LASSO) forcing the exposure variable to be always in the model.
+
+```{r}
+library(glmnet)
+data_glm = as.data.frame(cbind(x,U))
+# Choose Constrained Coefficients so we force the exposure to always be in the model
+lb <- rep(0,length(colnames( data_glm)))
+ub <- rep(Inf,length(colnames( data_glm )))
+ub[1]=0 # so there is no penalization on the exposure variable
+cv.lasso <- glmnet::cv.glmnet(x=as.matrix(data_glm),y=y,lower.limits = lb, upper.limits = ub, family = "binomial")
+# Fit the final model on the training data
+model <- glmnet::glmnet(x=as.matrix(data_glm),y=y, alpha = 1, family = "binomial",lambda = cv.lasso$lambda.min)
+# Display regression coefficients
+coef(model)
+```
