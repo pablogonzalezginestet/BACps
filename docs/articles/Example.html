@@ -106,61 +106,60 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fit_bacps</span> <span class="op">=</span> <span class="fu">BACps</span><span class="fu">::</span><span class="fu"><a href="../reference/bacps.html">bacps</a></span><span class="op">(</span>w<span class="op">=</span><span class="fl">50</span>,x<span class="op">=</span><span class="va">x</span>,y<span class="op">=</span><span class="va">y</span>,U<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">U</span><span class="op">)</span>, niter_1st<span class="op">=</span><span class="fl">1000</span>, niter_2nd<span class="op">=</span><span class="fl">1500</span>, burnin_1st<span class="op">=</span><span class="fl">500</span>, burnin_2nd<span class="op">=</span><span class="fl">500</span><span class="op">)</span>
 <span class="co">#&gt; [1] "acceptation ratio of parameter alpha:"</span>
-<span class="co">#&gt; [1] 0.173</span>
+<span class="co">#&gt; [1] 0.174</span>
 <span class="co">#&gt; [1] "First Stage Done!"</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;    4.70    0.05    4.75 </span>
-<span class="co">#&gt;            </span>
-<span class="co">#&gt; 0.01333333 </span>
+<span class="co">#&gt;    2.69    0.05    2.73 </span>
+<span class="co">#&gt;      </span>
+<span class="co">#&gt; 0.01 </span>
 <span class="co">#&gt; [1] "2nd Stage Done!"</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   61.28    0.02   61.41</span></code></pre></div>
+<span class="co">#&gt;   36.21    0.00   36.20</span></code></pre></div>
 <p>The average causal effect (conditional) is:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fit_bacps</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; [1] 0.2156282</span></code></pre></div>
+<span class="co">#&gt; [1] 0.1959671</span></code></pre></div>
 <p>The posterior probability on the model indicator variable is:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fit_bacps</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#&gt;                 post.alphaX</span>
-<span class="co">#&gt; 6   6 1 0 1 0 0 0.022977023</span>
-<span class="co">#&gt; 10 10 1 0 0 1 0 0.007992008</span>
-<span class="co">#&gt; 14 14 1 0 1 1 0 0.969030969</span></code></pre></div>
+<span class="co">#&gt; 10 10 1 0 0 1 0  0.05794206</span>
+<span class="co">#&gt; 14 14 1 0 1 1 0  0.94205794</span></code></pre></div>
 <p>The informative prior distribution on the model indicator of the propensity score used in the second stage (which is a posterior probability in the first stage):</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fit_bacps</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#&gt;       &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; post.alphaX|Y</span>
-<span class="co">#&gt;  [1,]    0    0    0    0    1   0.024954233</span>
-<span class="co">#&gt;  [2,]    0    0    0    1    0   0.092569942</span>
-<span class="co">#&gt;  [3,]    0    0    0    1    1   0.024954233</span>
-<span class="co">#&gt;  [4,]    0    0    1    0    0   0.092569942</span>
-<span class="co">#&gt;  [5,]    0    0    1    0    1   0.024954233</span>
-<span class="co">#&gt;  [6,]    0    0    1    1    0   0.092569942</span>
-<span class="co">#&gt;  [7,]    0    0    1    1    1   0.024954233</span>
-<span class="co">#&gt;  [8,]    0    1    0    0    0   0.015525574</span>
-<span class="co">#&gt;  [9,]    0    1    0    0    1   0.003521494</span>
-<span class="co">#&gt; [10,]    0    1    0    1    0   0.015525574</span>
-<span class="co">#&gt; [11,]    0    1    0    1    1   0.003521494</span>
-<span class="co">#&gt; [12,]    0    1    1    0    0   0.015525574</span>
-<span class="co">#&gt; [13,]    0    1    1    0    1   0.003521494</span>
-<span class="co">#&gt; [14,]    0    1    1    1    0   0.015525574</span>
-<span class="co">#&gt; [15,]    0    1    1    1    1   0.003521494</span>
-<span class="co">#&gt; [16,]    1    0    0    0    0   0.092569942</span>
-<span class="co">#&gt; [17,]    1    0    0    0    1   0.024954233</span>
-<span class="co">#&gt; [18,]    1    0    0    1    0   0.092569942</span>
-<span class="co">#&gt; [19,]    1    0    0    1    1   0.024954233</span>
-<span class="co">#&gt; [20,]    1    0    1    0    0   0.092569942</span>
-<span class="co">#&gt; [21,]    1    0    1    0    1   0.024954233</span>
-<span class="co">#&gt; [22,]    1    0    1    1    0   0.092569942</span>
-<span class="co">#&gt; [23,]    1    0    1    1    1   0.024954233</span>
-<span class="co">#&gt; [24,]    1    1    0    0    0   0.015525574</span>
-<span class="co">#&gt; [25,]    1    1    0    0    1   0.003521494</span>
-<span class="co">#&gt; [26,]    1    1    0    1    0   0.015525574</span>
-<span class="co">#&gt; [27,]    1    1    0    1    1   0.003521494</span>
-<span class="co">#&gt; [28,]    1    1    1    0    0   0.015525574</span>
-<span class="co">#&gt; [29,]    1    1    1    0    1   0.003521494</span>
-<span class="co">#&gt; [30,]    1    1    1    1    0   0.015525574</span>
-<span class="co">#&gt; [31,]    1    1    1    1    1   0.003521494</span></code></pre></div>
+<span class="co">#&gt;  [1,]    0    0    0    0    1   0.017091763</span>
+<span class="co">#&gt;  [2,]    0    0    0    1    0   0.102416512</span>
+<span class="co">#&gt;  [3,]    0    0    0    1    1   0.017091763</span>
+<span class="co">#&gt;  [4,]    0    0    1    0    0   0.102416512</span>
+<span class="co">#&gt;  [5,]    0    0    1    0    1   0.017091763</span>
+<span class="co">#&gt;  [6,]    0    0    1    1    0   0.102416512</span>
+<span class="co">#&gt;  [7,]    0    0    1    1    1   0.017091763</span>
+<span class="co">#&gt;  [8,]    0    1    0    0    0   0.015374023</span>
+<span class="co">#&gt;  [9,]    0    1    0    0    1   0.002919766</span>
+<span class="co">#&gt; [10,]    0    1    0    1    0   0.015374023</span>
+<span class="co">#&gt; [11,]    0    1    0    1    1   0.002919766</span>
+<span class="co">#&gt; [12,]    0    1    1    0    0   0.015374023</span>
+<span class="co">#&gt; [13,]    0    1    1    0    1   0.002919766</span>
+<span class="co">#&gt; [14,]    0    1    1    1    0   0.015374023</span>
+<span class="co">#&gt; [15,]    0    1    1    1    1   0.002919766</span>
+<span class="co">#&gt; [16,]    1    0    0    0    0   0.102416512</span>
+<span class="co">#&gt; [17,]    1    0    0    0    1   0.017091763</span>
+<span class="co">#&gt; [18,]    1    0    0    1    0   0.102416512</span>
+<span class="co">#&gt; [19,]    1    0    0    1    1   0.017091763</span>
+<span class="co">#&gt; [20,]    1    0    1    0    0   0.102416512</span>
+<span class="co">#&gt; [21,]    1    0    1    0    1   0.017091763</span>
+<span class="co">#&gt; [22,]    1    0    1    1    0   0.102416512</span>
+<span class="co">#&gt; [23,]    1    0    1    1    1   0.017091763</span>
+<span class="co">#&gt; [24,]    1    1    0    0    0   0.015374023</span>
+<span class="co">#&gt; [25,]    1    1    0    0    1   0.002919766</span>
+<span class="co">#&gt; [26,]    1    1    0    1    0   0.015374023</span>
+<span class="co">#&gt; [27,]    1    1    0    1    1   0.002919766</span>
+<span class="co">#&gt; [28,]    1    1    1    0    0   0.015374023</span>
+<span class="co">#&gt; [29,]    1    1    1    0    1   0.002919766</span>
+<span class="co">#&gt; [30,]    1    1    1    1    0   0.015374023</span>
+<span class="co">#&gt; [31,]    1    1    1    1    1   0.002919766</span></code></pre></div>
 <p>The posterior distribution of the model indicators of the prognostic score model which is used to compute the posterior distribution of the model indicator of the propensity score model:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fit_bacps</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>
@@ -171,9 +170,9 @@
 <span class="co">#&gt;      01110      01111      10000      10001      10010      10011      10100 </span>
 <span class="co">#&gt; 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 0.00000000 </span>
 <span class="co">#&gt;      10101      10110      10111      11000      11001      11010      11011 </span>
-<span class="co">#&gt; 0.00000000 0.44111776 0.30938124 0.00000000 0.00000000 0.00000000 0.00000000 </span>
+<span class="co">#&gt; 0.00000000 0.57285429 0.19161677 0.00000000 0.00000000 0.00000000 0.00000000 </span>
 <span class="co">#&gt;      11100      11101      11110      11111 </span>
-<span class="co">#&gt; 0.00000000 0.00000000 0.16566866 0.08383234</span></code></pre></div>
+<span class="co">#&gt; 0.00000000 0.00000000 0.16566866 0.06986028</span></code></pre></div>
 <p>As a comparator, let’s run a penalized logistic regression (LASSO) forcing the exposure variable to be always in the model.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glmnet.stanford.edu">glmnet</a></span><span class="op">)</span>
@@ -191,13 +190,13 @@
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="co">#&gt; 7 x 1 sparse Matrix of class "dgCMatrix"</span>
 <span class="co">#&gt;                       s0</span>
-<span class="co">#&gt; (Intercept) -0.097842570</span>
-<span class="co">#&gt; x            0.671696930</span>
-<span class="co">#&gt; X1           0.863977810</span>
-<span class="co">#&gt; X2          -0.109517966</span>
-<span class="co">#&gt; X3           0.978955338</span>
-<span class="co">#&gt; X4           1.009557141</span>
-<span class="co">#&gt; X5           0.007174902</span></code></pre></div>
+<span class="co">#&gt; (Intercept) -0.162983900</span>
+<span class="co">#&gt; x            0.438787911</span>
+<span class="co">#&gt; X1           0.838364564</span>
+<span class="co">#&gt; X2          -0.009521413</span>
+<span class="co">#&gt; X3           0.883207015</span>
+<span class="co">#&gt; X4           0.926778341</span>
+<span class="co">#&gt; X5           .</span></code></pre></div>
 </div>
   </div>
 
