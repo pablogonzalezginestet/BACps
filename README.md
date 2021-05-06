@@ -11,7 +11,11 @@
 The goal of BACps is to estimate the average causal effect accounting for two sources of uncertainty:
 the uncertainty regards the propensity score
 and the model uncertainty
-
+<ol>
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ol>
 
 ## Installation
 
