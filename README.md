@@ -6,8 +6,12 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
+## Bayesian Adjustment for Confounding (BAC) in Bayesian Propensity Score Estimation
 
-The goal of BACps is to …
+The goal of BACps is to estimate the average causal effect accounting for two sources of uncertainty:
+the uncertainty regards the propensity score
+and the model uncertainty
+
 
 ## Installation
 
