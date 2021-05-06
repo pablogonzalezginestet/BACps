@@ -16,6 +16,7 @@ The goal of BACps is to estimate the average causal effect accounting for two so
 
 </ul>
 
+If every model is given the same weights, most of the time instrumental variables will be included in the propensity score since instrumental variable is associated to the exposure variable. However, the literature has shown that including these variables might increase the variance and amplify the bias of the estimate (Pearl 2010 and Brookhart et al. 2006)
 ## Installation
 
 You can install the package version from [GitHub](https://github.com/)
@@ -30,3 +31,9 @@ devtools::install_github("pablogonzalezginestet/BACps")
 
 See the vignette for details: [online
 vignette](https://pablogonzalezginestet.github.io/BACps/)
+
+## References
+
+Brookhart MA, Schneeweiss S, Rothman KJ, Glynn RJ, Avorn J, Stürmer T. Variable selection for propensity score models. Am J Epidemiol. 2006 Jun 15;163(12):1149-56.
+
+Pearl, J., P. Grunwald, and P. Spirtes. "Proceedings of the Twenty-Sixth Conference on Uncertainty in Artificial Intelligence (UAI 2010)." (2010): 417-24.
