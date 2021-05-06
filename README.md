@@ -12,7 +12,7 @@ The goal of BACps is to estimate the average causal effect accounting for two so
 
 <ul>
   <li>uncertainty regards the propensity score </li>
-  <li>the model uncertainty</li>
+  <li> uncertainty regards the model </li>
 
 </ul>
 
