@@ -16,7 +16,8 @@ The goal of BACps is to estimate the average causal effect accounting for two so
 
 </ul>
 
-If every model is given the same weights, most of the time instrumental variables will be included in the propensity score since instrumental variable is associated to the exposure variable. However, the literature has shown that including these variables might increase the variance and amplify the bias of the estimate (Pearl 2010 and Brookhart et al. 2006)
+If every model is given the same weights, most of the time instrumental variables will be included in the propensity score since instrumental variables are associated to the exposure variable. However, the literature has shown that including these variables might increase the variance and amplify the bias of the estimate (Pearl 2010 and Brookhart et al. 2006). The strategy that we apply to limit the instrumental variables in the propensity score model is to incorporate a informative prior. The informative prior over the model indicator of the propensity score play the role to shape the posterior model distribution of the propensity score so that this posterior gives less weights to models that include instrumental variables and more weights to those models that include confounders and predictors of the outcome variable.  
+
 ## Installation
 
 You can install the package version from [GitHub](https://github.com/)
